@@ -1,5 +1,5 @@
 # Problema 6
-def get_longest_div_k(lst: object, k: object) -> object:
+def get_longest_div_k(lst, k):
     """
     Determina numere divizibile cu k dintr-o lista
     :param lst: lista de nr. intrego
@@ -52,11 +52,47 @@ def test_get_longest_digit_count_desc():
     assert get_longest_digit_count_desc([89, 754, 120, 65, 91, 857, 6310]) == [754, 65, 91, 6310]
 
 
+# problema 7
+def is_prime(x):
+    """"
+    Determina daca un numar este prim
+    :param x: numar intreg
+    :return: True daca numarul este prim, False in caz contrar
+    """
+    if x < 2:
+        return False
+    for i in range(2, x // 2 + 1):
+        if x % i == 0:
+            return False
+    return True
+
+
+def get_longest_all_not_prime(lst):
+    """
+    Determina numerele care nu sunt prime
+    :param lst: lista de numere intregi
+    :return: lista care contine toate numerele neprime
+    """
+    rezultat = []
+    for i in lst:
+        if not is_prime(i):
+            rezultat.append(i)
+    return rezultat
+
+
+def test_get_longest_all_not_prime():
+    assert get_longest_all_not_prime([]) == []
+    assert get_longest_all_not_prime([13, 25, 17, 81, 19, 32]) == [25, 81, 32]
+    assert get_longest_all_not_prime([25, 82, 64, 26, 121, 1]) == [25, 82, 64, 26, 121, 1]
+    assert get_longest_all_not_prime([17, 13]) == []
+
+
 def print_menu():
     print("1.Citire lista")
     print("2.Afisare numere divizibile cu k")
     print("3.Afisare numere care au cifrele in ordine descrescatoare")
-    print("4.Iesire")
+    print("4.Afisare numere neprime")
+    print("5.Iesire")
 
 
 def citire_lista():
@@ -70,6 +106,7 @@ def citire_lista():
 def main():
     test_get_longest_div_k()
     test_get_longest_digit_count_desc()
+    test_get_longest_all_not_prime()
     lst = []
     while True:
         print_menu()
@@ -82,6 +119,8 @@ def main():
         elif optiune == "3":
             print(get_longest_digit_count_desc(lst))
         elif optiune == "4":
+            print(get_longest_all_not_prime(lst))
+        elif optiune == "5":
             break
         else:
             print("Optiune gresita. Reincercati!")
